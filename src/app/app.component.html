@@ -1,3 +1,91 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <ion-content class="ion-padding">
+    <nz-calendar
+      [nzFullscreen]="false"
+      [nzDateCell]="dateCell"
+      [(ngModel)]="selectedValue"
+      (nzSelectChange)="selectChange($event)"
+    >
+      <!-- <ul *nzDateCell="let date" class="events">
+        <ng-container [ngSwitch]="date.getDate()">
+          <ng-container *ngSwitchCase="8">
+            <li *ngFor="let item of listDataMap.eight">
+              <nz-badge [nzStatus]="item.type"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="10">
+            <li *ngFor="let item of listDataMap.ten">
+              <nz-badge [nzStatus]="item.type"></nz-badge>
+            </li>
+          </ng-container>
+          <ng-container *ngSwitchCase="11">
+            <li *ngFor="let item of listDataMap.eleven">
+              <nz-badge [nzStatus]="item.type"></nz-badge>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul> -->
+      <ng-container *nzMonthCell="let month">
+        <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+          <section>{{ monthData }}</section>
+          <span>Backlog number</span>
+        </div>
+      </ng-container>
+    </nz-calendar>
+
+    <ng-template #dateCell let-date>
+      <nz-badge nzStatus="error" *ngIf="isEventOn(date)"></nz-badge>
+    </ng-template>
+
+    <ion-grid *ngIf="isThereEvents()">
+      <ion-row class="ion-justify-content-center">
+        <ion-col  size-sm="12" size-md="8">
+          <nz-list class="demo-loadmore-list" [nzLoading]="initLoading">
+            <nz-list-item *ngFor="let item of list">
+              <ng-container *ngIf="!item.loading">
+                <ion-grid>
+                  <ion-row class="ion-justify-content-between">
+                    <ion-col size="7" size-sm="7" size-md="8">
+                      <nz-list-item-meta
+                        nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                      >
+                        <nz-list-item-meta-title>
+                          <a href="https://ng.ant.design">{{
+                            item.name.last
+                          }}</a>
+                        </nz-list-item-meta-title>
+                      </nz-list-item-meta>
+                    </ion-col>
+                    <ion-col size="5" size-sm="5" size-md="4">
+                      <ul nz-list-item-actions class="ion-float-right">
+                        <nz-list-item-action
+                          ><a (click)="edit(item)">edit</a></nz-list-item-action
+                        >
+                        <nz-list-item-action
+                          ><a (click)="edit(item)">more</a></nz-list-item-action
+                        >
+                      </ul>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ng-container>
+              <nz-skeleton
+                *ngIf="item.loading"
+                [nzAvatar]="true"
+                [nzActive]="true"
+                [nzTitle]="false"
+                [nzLoading]="true"
+              ></nz-skeleton>
+            </nz-list-item>
+            <div class="loadmore" nz-list-load-more>
+              <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">
+                loading more
+              </button>
+            </div>
+          </nz-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
 </ion-app>

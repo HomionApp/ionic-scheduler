@@ -1,7 +1,10 @@
 {
   "name": "ionic2",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": true
+    },
+    "cordova": {}
   },
   "type": "angular"
 }

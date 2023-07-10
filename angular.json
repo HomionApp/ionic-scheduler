@@ -36,7 +36,12 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "./node_modules/smart-webcomponents-angular/source/styles/smart.default.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -116,7 +121,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "./node_modules/smart-webcomponents-angular/source/styles/smart.default.css"
+            ],
             "scripts": []
           },
           "configurations": {
